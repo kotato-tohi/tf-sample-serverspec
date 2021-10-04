@@ -17,6 +17,7 @@ serverspecでテストするための環境
 * ruby v3.0.1
 
 # Installation
+
 ```zsh
 $ git clone
 ## edit:terraform.tfvars
@@ -28,7 +29,8 @@ $ bundle exec serverspec-init
 # edit:~/.ssh/config
 ```
 
-``` text:.ssh/config
+## add host  ~/.ssh/config
+``` 
   Host test-target-server
     HostName [EC2 Instance IP adder]
     IdentityFile YOUR_SECRET_KEY.pem
@@ -36,7 +38,6 @@ $ bundle exec serverspec-init
 ```
 
 ## terraform.tfvars sample
-
 ```
 tag_prefix   = "tf-sample-serverspec"
 resource_cnt = 1
@@ -50,6 +51,7 @@ ec2_conf = {
 
 
 ## serverspec sample
+
 
 # Note
 
