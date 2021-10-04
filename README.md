@@ -25,6 +25,14 @@ $ terraform apply
 $ cd serverspec
 $ bundle install --path 
 $ bundle exec serverspec-init
+# edit:~/.ssh/config
+```
+
+``` : ~/.ssh/config
+  Host test-target-server
+    HostName [EC2 Instance IP adder]
+    IdentityFile YOUR_SECRET_KEY.pem
+    User ec2-user
 ```
 
 ## terraform.tfvars sample
@@ -39,6 +47,9 @@ ec2_conf = {
   key_pair      = "YOUR_SECRET_KEY.pem"
 }
 ```
+
+
+## serverspec sample
 
 # Note
 
