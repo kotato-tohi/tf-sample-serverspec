@@ -28,7 +28,7 @@ $ bundle exec serverspec-init
 # edit:~/.ssh/config
 ```
 
-``` : ~/.ssh/config
+``` text:.ssh/config
   Host test-target-server
     HostName [EC2 Instance IP adder]
     IdentityFile YOUR_SECRET_KEY.pem
