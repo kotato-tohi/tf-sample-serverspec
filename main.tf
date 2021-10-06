@@ -138,7 +138,8 @@ resource "aws_security_group" "ec2_sg" {
 # --------------------------------------------#
 resource "aws_instance" "ec2" {
 
-  count                       = var.resource_cnt
+  # count                       = var.resource_cnt
+  count                       = 2
   ami                         = lookup(var.ec2_conf, "ami")
   instance_type               = lookup(var.ec2_conf, "instance_type")
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]

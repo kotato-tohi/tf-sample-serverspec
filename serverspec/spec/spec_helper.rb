@@ -1,28 +1,24 @@
 require 'serverspec'
 require 'net/ssh'
+require 'specinfra'
+ 
+# include SpecInfra::Helper::Ssh
+# include SpecInfra::Helper::DetectOS
+
+# include Serverspec::Helper::Ssh
+# include Serverspec::Helper::DetectOS
 
 set :backend, :ssh
 
-if ENV['ASK_SUDO_PASSWORD']
-  begin
-    require 'highline/import'
-  rescue LoadError
-    fail "highline is not available. Try installing it."
-  end
-  set :sudo_password, ask("Enter sudo password: ") { |q| q.echo = false }
-else
-  set :sudo_password, ENV['SUDO_PASSWORD']
+
+RSpec.configure do |c|
+  c.host  = ENV['TARGET_HOST']
+  options = Net::SSH::Config.for(c.host)
+  user    = 'ec2-user'
+  c.ssh   = Net::SSH.start(c.host, user, :keys => ['~/pem/common_key.pem'])
+  c.os    = backend(Serverspec::Commands::Base).check_os
+  # c.os    = :backend
 end
-
-host = ENV['TARGET_HOST']
-
-options = Net::SSH::Config.for(host)
-
-options[:user] ||= Etc.getlogin
-
-set :host,        options[:host_name] || host
-set :ssh_options, options
-
 # Disable sudo
 # set :disable_sudo, true
 
